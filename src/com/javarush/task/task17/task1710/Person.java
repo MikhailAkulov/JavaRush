@@ -47,11 +47,12 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    @Override
-    public String toString() {
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-//        return name + " " + sex + " " + formatter.format(birthDate);
-
-        return name + " " + sex + " " + birthDate;
-    }
+    // 1 вариант
+//    @Override
+//    public String toString() {
+////        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+////        return name + " " + sex + " " + formatter.format(birthDate);
+//
+//        return name + " " + sex + " " + birthDate;
+//    }
 }
