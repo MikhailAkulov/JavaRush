@@ -1,11 +1,8 @@
 package com.javarush.task.task17.task1710;
 
-import com.javarush.task.pro.task17.task1714.Swimmable;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /* 
 CRUD
