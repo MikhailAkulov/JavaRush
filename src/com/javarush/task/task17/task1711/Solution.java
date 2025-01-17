@@ -1,5 +1,6 @@
 package com.javarush.task.task17.task1711;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +47,85 @@ public class Solution {
         allPeople.add(Person.createMale("Петров Петр", new Date()));  //сегодня родился    id=1
     }
 
+    static SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+    static SimpleDateFormat sdfOutput = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+
     public static void main(String[] args) {
         //start here - начни тут
+        if (args == null || args.length < 1) {
+            System.out.println("Аргументы не переданы");
+        }
+        try {
+            switch (args[0]) {
+                case "-c":      // аргументы для запуска: -c Сергеева ж 15/04/1990 Пупкин м 13/12/2000 name2 м 17/01/1987 name3 ж 31/01/1986 name4 м 14/10/1991
+                    synchronized (allPeople) {
+                        for (int i = 1; i < args.length; i = i + 3) {
+                            String name = args[i];
+                            String sex = args[i + 1];
+                            Date birthdayDate = sdfInput.parse(args[i + 2]);
+                            Person person = sex.equals("м") ? Person.createMale(name, birthdayDate) : Person.createFemale(name, birthdayDate);
+                            allPeople.add(person);
+                            System.out.println(allPeople.indexOf(person));
+//                            System.out.println(person.getName() + " " + person.getSex() + " " + person.getBirthDate());       // трока для проверки результата выполнения
+                        }
+                    }
+                    break;
+                case "-u":      // аргументы для запуска: -u 0 Сергеева ж 15/04/1990 1 Пупкин м 13/12/2000 2 name2 м 17/01/1987 3 name3 ж 31/01/1986 4 name4 м 14/10/1991
+                    synchronized (allPeople) {
+                        for (int i = 1; i < args.length; i = i + 4) {
+                            int id = 0;
+                            try {
+                                id = Integer.parseInt(args[i]);
+                                String name = args[i + 1];
+                                String sex = args[i + 2];
+                                Date birthdayDate = sdfInput.parse(args[i + 3]);
+                                allPeople.get(id).setName(name);
+                                allPeople.get(id).setSex("м".equals(sex) ? Sex.MALE : Sex.FEMALE);
+                                allPeople.get(id).setBirthDate(birthdayDate);
+//                                Person person = allPeople.get(id);        // 2 строки для проверки результата выполнения
+//                                System.out.println(person.getName() + " " + person.getSex() + " " + person.getBirthDate());
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("Нет человека с индексом: " + id);
+                            }
+                        }
+                    }
+                    break;
+                case "-d":      // аргументы для запуска: -d 0 1 2 3 4
+                    synchronized (allPeople) {
+                        for (int i = 1; i < args.length; i++) {
+                            int id = 0;
+                            try {
+                                id = Integer.parseInt(args[i]);
+                                allPeople.get(id).setName(null);
+                                allPeople.get(id).setSex(null);
+                                allPeople.get(id).setBirthDate(null);
+//                                Person person = allPeople.get(id);        // 2 строки для проверки результата выполнения
+//                                System.out.println(person.getName() + " " + person.getSex() + " " + person.getBirthDate());
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("Нет человека с индексом: " + id);
+                            }
+                        }
+                    }
+                    break;
+                case "-i":      // аргументы для запуска: -i 0 1 2 3 4
+                    synchronized (allPeople) {
+                        for (int i = 1; i < args.length; i++) {
+                            int id = 0;
+                            try {
+                                id = Integer.parseInt(args[i]);
+                                Person person = allPeople.get(id);
+                                System.out.println(person.getName() + " " +
+                                        (person.getSex().equals(Sex.MALE) ? "м" : "ж") + " " +
+                                        sdfOutput.format(person.getBirthDate()));
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("Нет человека с индексом: " + id);
+                            }
+                        }
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
