@@ -55,5 +55,23 @@ public class IOExamples {
 
         fis.close();                        // закрываем оба потока. Они больше не нужны.
         fos.close();
+
+        /**
+         * Пример 4
+         * Копируем файл на диске (с массивом)
+         */
+        //Создаем поток-чтения-байт-из-файла
+        FileInputStream inputStream1 = new FileInputStream("C:\\Users\\Akulo\\Desktop\\SourceDirectory\\pushkin-copy.txt");
+        // Создаем поток-записи-байт-в-файл
+        FileOutputStream outputStream1 = new FileOutputStream("C:\\Users\\Akulo\\Desktop\\SourceDirectory\\pushkin-copy2.txt");
+
+        byte[] buffer = new byte[1000];
+        while (inputStream1.available() > 0) {          // пока есть еще непрочитанные байты
+            int count = inputStream1.read(buffer);      // прочитать очередной блок байт в переменную buffer и реальное количество в count
+            outputStream1.write(buffer, 0, count);  // записать блок(часть блока) во второй поток
+        }
+        // закрываем оба потока. Они больше не нужны.
+        inputStream1.close();
+        outputStream1.close();
     }
 }
