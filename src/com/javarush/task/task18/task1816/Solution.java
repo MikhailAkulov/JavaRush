@@ -1,6 +1,5 @@
 package com.javarush.task.task18.task1816;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
