@@ -1,10 +1,7 @@
 package com.javarush.task.task18.extraExamples;
 
-import com.sun.source.tree.WhileLoopTree;
-
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
