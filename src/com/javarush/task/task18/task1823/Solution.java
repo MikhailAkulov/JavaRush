@@ -22,8 +22,8 @@ public class Solution {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String fileName = "";
 
-        // 1 вариант
-//        while (reader.ready()) {
+//         1 вариант
+//        while (true) {
 //            fileName = reader.readLine();
 //            if (fileName.equals("exit")) {
 //                break;
@@ -31,6 +31,7 @@ public class Solution {
 //            ReadThread readThread = new ReadThread(fileName);
 //            readThread.start();
 //        }
+//        System.out.println(resultMap);
 
         // 2 вариант
         while (!(fileName = reader.readLine()).equals("exit")) {
