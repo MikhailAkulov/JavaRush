@@ -28,4 +28,7 @@ class Hamster implements Serializable {
     public String name;
     public int age;
     public int weight;
+
+    // переменная помеченная модификатором transient не будет учитываться при сериализации
+    transient public InputStream in = System.in;
 }
